@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joe & Robert News Blog</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header_logo">JOE-ROBERT TECH BLOG</div>
+    <div class="header__search">Search</div>
+  </header>
+ 
+  <div class="wrapper">
+    <div class="news-single">          
+        <a href="/">&larr;- Back</a>
+        <% if (article) { %>
+          <h2><%- article.title %></h2>
+          <p><%- article.description %></p>
+          <p><%- article.content %></p>
+          <footer class="footer">
+            <div class="footer__content">
+            </div>
+            <div class="newsletter">
+              <p>Sign up for the JOE-ROBERT newsletter to read more:</p>
+              <form action="/subscribe" method="POST">
+                <input type="email" name="email" placeholder="Your email address" required>
+                <input type="submit" value="Subscribe">
+              </form>
+            </div>
+          </footer>
+        <% } else { %>
+          <p>Post Not Found</p>
+        <% } %>
+      </div>
+  </div>
+</body>
+</html>
