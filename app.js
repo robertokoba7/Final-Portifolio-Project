@@ -19,12 +19,14 @@ app.set('view engine', 'ejs')
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended : true }))
+app.use(express.urlencoded({ extended: true }));
+
 
 // Routes
 const newsRouter = require('./src/routes/news')
 
 app.use('/', newsRouter)
-app.use('/article', newsRouter)
+app.use('/search', newsRouter)
 
 //app listening to the set port number
 app.listen(port, () => console.log(`Listening on port ${port}`))

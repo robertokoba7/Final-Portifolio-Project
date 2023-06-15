@@ -12,33 +12,27 @@
     <div class="header_logo">JOE-ROBERT TECH BLOG</div>
     <div class="header__search">
 
-        <form action="/" method="POST">
+        <form action="/search" method="POST">
           <input type="text" name="search" placeholder="Search for news" required>
           <input type="submit" value="Search">
         </form>
       </div>
-
   </header>
  
   <div class="wrapper">
     <div class="news">
       <% if (articles != null) { %>
         <% articles.forEach(function(article, index) { %>
-          <a href="/article/<%- article.author %>" class="news__card">
+          <a href="<%- article.url %>" class="news__card"> <!-- Modify the href attribute with article.url -->
             <img src="<%- article.urlToImage %>" alt="<%- article.title %>">
             <h2><%- article.title %></h2>
             <p><%- article.description %></p>
-            <p><%- article.content %></p>
-            <p>
-              <!-- Include and execute JavaScript file -->
-              <script src="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=ff2b3717e2e343918dbea75624ff5422"></script>
-            </p>
+            <p><%- article.url %></p>
           </a>
         <% }) %>
         <% } else { %>
            Posts Not Found
-        <% } %>
-      </div>
+        <% } %>    
     </div>
   </div>
 </body>

@@ -36,22 +36,24 @@ newsRouter.get('/article/:author', async (req, res) => {
   }
 });
 
-newsRouter.post('/article/:author', async (req, res) => {
-    try {
-      const search = req.body.search;
-      const newsAPI = await axios.get('https://api.twitter.com/2/tweets/search/stream')
-      const articles = newsAPI.data.articles;
-      const article = articles.find((a) => a.author === decodeURIComponent(author));
-  
-      if (article) {
-        res.render('newsSearch', { articles: article });
-      } else {
-        res.render('newsSearch', { articles: null });
-      }
-    } catch (err) {
-      res.render('newsSearch', { articles: null });
-      console.error('Error:', err.message);
-    }
-  });
+newsRouter.post('/search', async (req, res) => {
+  try {
+    const search = req.body.search;
+    const newsAPI = await axios.get(
+      `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=ff2b3717e2e343918dbea75624ff5422`
+    );
+    const articles = newsAPI.data.articles;
+    const filteredArticles = articles.filter(
+      (a) =>
+        a.author.toLowerCase().includes(search.toLowerCase()) ||
+        a.title.toLowerCase().includes(search.toLowerCase())
+    );
+
+    res.render('newsSearch', { articles: filteredArticles });
+  } catch (err) {
+    res.render('newsSearch', { articles: null });
+    console.error('Error:', err.message);
+  }
+});
 
 module.exports = newsRouter;
